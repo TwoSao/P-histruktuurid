@@ -1,6 +1,3 @@
-from string import printable
-
-
 print("Tere!")
 a=5
 aste=2
