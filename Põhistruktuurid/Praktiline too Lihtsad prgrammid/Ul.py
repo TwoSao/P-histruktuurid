@@ -84,21 +84,44 @@
 #     print("Sisesta ujikmaarvud!")
 
 # #Ul8
-# kütuse=int(input("Kirjutage, kui palju kütust: "))
-# läbitud=int(input("Läbitud vahemaa km: "))
-# summs=läbitud/kütuse
-# print(f"Kütusekulu 100 km kohta: {summs}")
+# try:
+    
+#     kütuse=int(input("Kirjutage, kui palju kütust: "))
+#     läbitud=int(input("Läbitud vahemaa km: "))
+#     if kütuse>0 and läbitud>0:
+#         summs=läbitud/kütuse
+#         print(f"Kütusekulu 100 km kohta: {summs}")
+#     else:
+#         print("Arv peab olema suurem kui 0")
+
+        
+# except :
+#      print("Väärtus peab olema numbriline")
 
 # Ul9
+# try:
+#     M = float(input("Time: "))
+#     kiirus = 29.9
+#     if M>0:
+#         distance = kiirus * (M / 60)
+#         print(f"distance {distance:.2f} time {M} minutes.")
+#     else:
+#         print("Arv peab olema suurem kui 0")
+# except :
+#     print("Väärtus peab olema numbriline")
 # M = float(input("Time: "))
 # kiirus = 29.9 
 # distance = kiirus * (M / 60)
 # print(f"distance {distance:.2f} time {M} minutes.")
 
 # ul10
-# minutid = int(input("Sisesta aeg minutites: "))
-
-# tunnid = minutid // 60
-# minutid_jarele = minutid % 60
-
-# print(f"{tunnid}:{minutid_jarele:02d}")
+# try:
+#     minutid = int(input("Sisesta aeg minutites: "))
+#     if minutid>0:
+#        tunnid = minutid // 60
+#        minutid_jarele = minutid % 60
+#        print(f"{tunnid}:{minutid_jarele:02d}") # :02d форматирования целых чисел в двухзначное число
+#     else:
+#         print("Arv peab olema suurem kui 0")
+# except:
+#     print("Väärtus peab olema numbriline")
