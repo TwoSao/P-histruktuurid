@@ -1,3 +1,5 @@
+import random
+
 # Ul 1
 # k = 0
 # for i in range(15):
@@ -105,7 +107,6 @@
 #         print(i)
 
 # Ul 8
-# Ul 8
 # while True:
 #     try:
 #         inch = float(input("Sisesta inch: "))
@@ -132,15 +133,45 @@
 #     raha = raha * 1.03
 # print(f"Summa {years} aasta pärast on {round((raha), 2)} Euro.")
 
-# Ul 22
+# Ul 22 (10)
 # summs = 0
 # for i in range(100, 201):
 #     if i % 17 == 0:
 #         summs += i
 # print(summs)
-# Ul 20
+# Ul 20 (11)
 # sum = 0
 # for i in range(20, 51):
 #     if i % 5 or i % 7 == 0:
 #         sum += i
 # print(sum)
+
+# Ul 10 (12)
+for i in range(10):
+    while True:
+        try:
+            num1 = float(input(f"Sisesta {i+1}. paari esimene arv: "))
+            num2 = float(input(f"Sisesta {i+1}. paari teine arv: "))
+            break
+        except ValueError:
+            print("Palun sisesta ainult numbrid.")
+    
+    if num1 > num2:
+        print(f"Suurem arv paaris {i+1} on: {num1}")
+    elif num2 > num1:
+        print(f"Suurem arv paaris {i+1} on: {num2}")
+    else:
+        print(f"Paaris {i+1} on mõlemad arvud võrdsed: {num1}")
+
+# Ul 13 (13)
+
+count = 0
+total_sum = 0
+
+for i in range(100, 1001):
+    if i % 7 == 0:
+        count += 1
+        total_sum += i
+
+print(f"Kõikide arvude arv vahemikus 100 kuni 1000, mis on 7-ga jaguvad: {count}")
+print(f"Nende arvude summa: {total_sum}")
