@@ -24,16 +24,16 @@ else:
 
 for i in range(num_examples):
     if tase == 1:
-        a = random.randint(1, 10)
-        b = random.randint(1, 10)
+        a = random.randint(-1, 10)
+        b = random.randint(-1, 10)
         tehe = random.choice(tehed1)
     elif tase == 2:
-        a = random.randint(1, 10)
-        b = random.randint(1, 10)
+        a = random.randint(-1, 10)
+        b = random.randint(-1, 10)
         tehe = random.choice(tehed)
     else:
-        a = random.randint(1, 100)
-        b = random.randint(1, 100)
+        a = random.randint(-1, 100)
+        b = random.randint(-1, 100)
         tehe = random.choice(tehed)
 
     if tehe == "+":
@@ -42,10 +42,13 @@ for i in range(num_examples):
         vastus = a - b
     elif tehe == "*":
         vastus = a * b
-    else:
+    elif tehe == "/":
+        while b == 0:
+            b = random.randint(-10, 100)
         vastus = a / b
 
-    print(f"{a} {tehe} {b} = ?")
+
+    print(f"{a} {tehe} {b} = ...")
     while True:
         try:
             vastus1 = float(input("Sisesta vastus: "))
