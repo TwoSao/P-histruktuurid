@@ -5,7 +5,6 @@ while True:
             break
         else:
             print("Sisestage positiivne arv")
-        break
     except ValueError:
         print("See pole täisarv. Proovige uuesti.")
 sum=0

@@ -5,7 +5,6 @@ while True:
             break
         else:
             print("Sisestage ainult positiivne arv")
-        break
     except ValueError:
         print("See pole täisarv. Proovige uuesti.")
 new = 0

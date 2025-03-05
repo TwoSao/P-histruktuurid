@@ -5,7 +5,7 @@ while True:
             break
         else:
             print("Sisestage ainult 1-9")
-        break
+        
     
     except ValueError:
         print("See pole täisarv. Proovige uuesti.")

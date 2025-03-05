@@ -1,6 +1,6 @@
 while True:
     try:
-        n=int(input())
+        n=abs(int(input("Sisestage arv: ")))
         break
     except ValueError:
         print("See pole täisarv. Proovige uuesti.")
