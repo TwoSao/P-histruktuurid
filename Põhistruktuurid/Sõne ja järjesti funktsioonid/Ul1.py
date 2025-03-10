@@ -16,7 +16,6 @@ while True:
         except ValueError:
             print("Error")
     if choice == "1":
-        # Показать текущий список
         print(f"\nТекущий список: {lists}")
     elif choice == "2":
         while True:
