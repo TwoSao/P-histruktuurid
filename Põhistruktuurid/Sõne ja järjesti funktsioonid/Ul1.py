@@ -1,87 +1,80 @@
-lists=[]
-print(f'У вас есть список {lists}\nВыберити функцию добавления lists = []')
-
+lists = []
+print(f'Teil on nimekiri {lists}\nValige lisamisfunktsioon lists = []')
 
 while True:
     try:
-        print("1. Сумма числовых значений в списке\n2. Добавить элемент в список\n3. Удалить элемент из списка\n4. Очистить список\n5. Выход\n6. Отсортировать список\n7. Перевернуть список\n8. Найти индекс элемента\n9. Дублировать список\n10. Перемешать список\n11. Сделать срез списка")
+        print("1. Numbriliste väärtuste summa nimekirjas\n2. Lisa element nimekirja\n3. Eemalda element nimekirjast\n4. Tühjenda nimekiri\n5. Välju\n6. Sorteeri nimekiri\n7. Pöörake nimekiri\n8. Leia elemendi indeks\n9. Dubleeri nimekiri\n10. Sega nimekiri\n11. Tee lõige nimekirjast")
 
-
-        choice = int(input("Ваш выбор: "))
+        choice = int(input("Teie valik: "))
         if choice == 1:
-
             try:
                 numeric_sum = sum(float(i) for i in lists)
-                print(f'Сумма числовых значений в списке: {numeric_sum}')
+                print(f'Numbriliste väärtuste summa nimekirjas: {numeric_sum}')
             except ValueError:
-                print("Ошибка: список содержит нечисловые элементы.")
+                print("Tõrge: nimekiri sisaldab mittenumbrilisi elemente.")
         elif choice == 2:
             while True:
                 try:
-                    itemchose = int(input("Выберете что хотите добавить\n1.Строку/Слово\n2.Цифру/Число\n3.Что бы выйти с стадии добавления: "))
+                    itemchose = int(input("Valige, mida soovite lisada\n1. Sõna/String\n2. Number\n3. Välju lisamisetapist: "))
                     if itemchose == 1:
-                        item=input("Ведите слово/строку которую хотите добавить: ")
+                        item = input("Sisestage sõna/string, mida soovite lisada: ")
                         lists.append(item)
                     elif itemchose == 2:
-                        item=int(input("Ведите число/цифру которую хотите добавить"))
+                        item = int(input("Sisestage number, mida soovite lisada: "))
                         lists.append(item)
-                    elif itemchose == 3: break
+                    elif itemchose == 3:
+                        break
                 except ValueError:
-                    print("Error")
-                print(f'Ваш список: {lists}')
+                    print("Viga")
+                print(f'Teie nimekiri: {lists}')
         elif choice == 3:
             while True:
                 try:
-                    item = input("Введите элемент, который хотите удалить: ")
+                    item = input("Sisestage element, mida soovite eemaldada: ")
                     if item in lists:
                         lists.remove(item)
-                        print(f'Ваш список: {lists}')
+                        print(f'Teie nimekiri: {lists}')
                         break
                     else:
-                        print("Элемента нет в списке")
+                        print("Elementi ei ole nimekirjas")
                 except Exception as e:
-                    print(f"Произошла ошибка: {e}")
+                    print(f"Tekkis viga: {e}")
         elif choice == 4:
             lists.clear()
-            print(f'Ваш список: {lists}')
+            print(f'Teie nimekiri: {lists}')
         elif choice == 5:
-            print("До свидания!")
+            print("Hüvasti!")
             break
         elif choice == 6:
             try:
                 lists.sort()
-                print(f"Список отсортирован. Список: {lists}")
+                print(f"Nimekiri on sorditud. Nimekiri: {lists}")
             except TypeError:
-                print("Ошибка сортировки: элементы списка должны быть одного типа.")
-
+                print("Sorteerimise viga: nimekirja elemendid peavad olema sama tüüpi.")
         elif choice == 7:
             lists.reverse()
-            print(f"Cписок перевёрнут. {lists}")
+            print(f"Nimekiri on pööratud. {lists}")
         elif choice == 8:
-            element = input("Введите элемент для поиска индекса: ")
+            element = input("Sisestage element indeksi leidmiseks: ")
             if element in lists:
-                print(f'Индекс элемента: {lists.index(element)}')
+                print(f'Elemendi indeks: {lists.index(element)}')
             else:
-                print("Элемент не найден.")
+                print("Elementi ei leitud.")
         elif choice == 9:
             new_list = lists * 2
-            print(f'Дублированный список: {new_list}')
-
+            print(f'Dubleeritud nimekiri: {new_list}')
         elif choice == 10:
             import random
             random.shuffle(lists)
-            print(f"Список перемешан. {lists}")
+            print(f"Nimekiri on segatud. {lists}")
         elif choice == 11:
             try:
-                start = int(input("Введите начальный индекс: "))
-                end = int(input("Введите конечный индекс: "))
-                print(f'Срез списка: {lists[start:end]}')
+                start = int(input("Sisestage algindeks: "))
+                end = int(input("Sisestage lõppindeks: "))
+                print(f'Nimekirja lõige: {lists[start:end]}')
             except ValueError:
-                print("Ошибка ввода индексов.")
-
-
+                print("Indeksi sisestamise viga.")
         else:
-            print("Пожалуйста, выберите число от 1 до 11")
-
+            print("Palun valige number vahemikus 1 kuni 11")
     except ValueError:
-        print("Пожалуйста, введите число от 1 до 11")
+        print("Palun sisestage number vahemikus 1 kuni 11")
