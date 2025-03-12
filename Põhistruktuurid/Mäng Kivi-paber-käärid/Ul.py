@@ -60,7 +60,7 @@ while True:
                 score2 += 1
                 print(f"Mängija 2 võitis! Mängija 2 skoor: {score2}!\nMängija 1 valis: {player1}\nMängija 2 valis: {player2}")
 
-    elif chose == 2:  # Игра с роботом
+    elif chose == 2:
         while True:
             try:
                 player1 = int(input("Mängija 1. Valige objekt\n1. Kivi\n2. Käärid\n3. Paber\n4. Väljumine\n"))
