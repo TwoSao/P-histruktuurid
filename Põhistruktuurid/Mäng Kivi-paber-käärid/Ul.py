@@ -33,7 +33,7 @@ while True:
 
 
             while player1 == player2:
-                print(f"Viik! Teie skoor: {score}")
+                print(f"Viik!")
                 try:
                     player1 = int(input("Mängija 1. Valige objekt\n1. Kivi\n2. Käärid\n3. Paber\n4. Väljumine\n"))
                     if player1 == 4:
@@ -80,7 +80,7 @@ while True:
 
             if player1 == player2:
                 print("Viik!")
-                print(f"Mõlemad valisid: {player1}")
+                print(f"Mõlemad valisid: {player2}")
             elif (player1 == 1 and player2 == 2) or (player1 == 2 and player2 == 3) or (player1 == 3 and player2 == 1):
                 score += 1
                 print(f"Mängija 1 võitis! Mängija 1 skoor: {score}!\nMängija 1 valis: {player1}\nRobot valis: {player2}")
