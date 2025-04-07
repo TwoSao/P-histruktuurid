@@ -2,7 +2,7 @@ from encodings.punycode import insertion_unsort
 
 from defs import *
 palgad=[1200,2500,750,395,1200]
-inimesed=["A","B","C","D","E"]
+inimesed=["a","B","C","D","E"]
 
 while 1:
     try:
@@ -38,7 +38,9 @@ while 1:
         elif answer=="8":
             inpsalarythan(palgad, inimesed)
         elif answer=="9":
-                
+            sortid(palgad, inimesed)
+        elif answer=="10":
+            break
 
     except:
         print("Error")

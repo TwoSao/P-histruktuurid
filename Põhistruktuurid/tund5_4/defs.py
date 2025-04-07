@@ -142,3 +142,14 @@ def inpsalarythan(p: list, i:list):
 
     print(newlistm.items())
 #4
+def sortid(p: list, i: list):
+    """
+
+    :param p:
+    :param i:
+    :return:
+    """
+    for j in range(len(i)):
+        if i[j].isalpha():
+            i[j]= i[j].upper[1:]
+    print(i)
