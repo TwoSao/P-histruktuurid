@@ -1,4 +1,4 @@
-
+import random
 dicts = {"привет": "tere", "спасибо": "aitäh", "пожалуйста": "palun", "да": "jah", "нет": "ei"}
 def mainmenu():
     print("1. Translate from Russian to Estonian")
@@ -83,16 +83,19 @@ def change_word():
         print("Word not found in the dictionary.")
 
 def testing():
-    while True:
-        try:
-            word = input("Enter the word to check: ")
-            if not word.isalpha():
-                print("Please enter a valid word.")
-                continue
-            break
-        except ValueError:
-            print("Invalid input. Please try again.")
-    word = word.lower()
+    if not dicts:
+        return "Sonastik on tuhi"
+    questions = list(dicts.items())
+    random.shuffle(questions)
+    correct = 0
+    total = len(questions)
 
-    if word in dicts or word in dicts.values():
-        print("The word is correct.")
+    for est, rus in questions:
+        answer = input(f"Kuidas tolgib '{est}' vene keelte? ")
+        if answer.lower() == rus.lower():
+            print("Oige!")
+            correct += 1
+        else:
+            print(f"Vale. Oige vastus on: {rus}")
+
+    print(f"Test on lopetatud! Teie result on: {round(correct / total * 100)}%")
