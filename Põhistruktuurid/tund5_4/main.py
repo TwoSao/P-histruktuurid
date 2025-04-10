@@ -1,4 +1,3 @@
-from encodings.punycode import insertion_unsort
 
 from defs import *
 palgad=[1200,2500,750,395,1200]
