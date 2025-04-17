@@ -7,7 +7,7 @@ logins = []
 passwords = []
 emails = []
 
-# Генерация пароля
+
 def generate_password(length: int) -> str:
     str0 = ".,:;!_*-+()/#¤%&"
     str1 = '0123456789'
@@ -41,7 +41,6 @@ def save_users():
         for login, password, email in zip(logins, passwords, emails):
             file.write(f"{login}:{password}:{email}\n")
 
-# Отправка письма
 def send_email_notification(to_email: str, subject: str, content: str):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
@@ -158,5 +157,3 @@ def writing():
             print('Viga')
             continue
 
-# Запуск
-load_users()
