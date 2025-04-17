@@ -1,5 +1,5 @@
 from My import *
-
+load_users()
 def main_menu():
     while True:
         print('1. Registreerimine\n2. Autoriseerimine\n3. Change password\n4. Password recovery\n5. Exit')

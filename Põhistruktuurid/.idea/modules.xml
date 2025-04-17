@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/E-kirja saatminr ja saamine/E-kirja saatminr ja saamine.iml" filepath="$PROJECT_DIR$/E-kirja saatminr ja saamine/E-kirja saatminr ja saamine.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Põhistruktuurid.iml" filepath="$PROJECT_DIR$/.idea/Põhistruktuurid.iml" />
       <module fileurl="file://$PROJECT_DIR$/tund5_4/tund5_4.iml" filepath="$PROJECT_DIR$/tund5_4/tund5_4.iml" />
     </modules>
