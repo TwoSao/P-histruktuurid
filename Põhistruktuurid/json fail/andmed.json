@@ -1,0 +1,15 @@
+{
+    "name": "John Doe",
+    "age": 30,
+    "city": "New York",
+    "isEmployed": true,
+    "autod": [
+        {
+            "muudel": "Toyota",
+            "varv": "Corolla",
+            "joung": 2015,
+            "hind": 15000
+        }
+
+    ]
+}
