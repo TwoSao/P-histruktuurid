@@ -1,43 +1,38 @@
-from question import *
 from respondents import *
-import random
-
-TOTAL_QUESTIONS = 5  # количество вопросов
-
+from question import add_question, save_question
+load_questions()
+load_respondents()
 def main():
-    load_question()  # Загружаем вопросы
-    load_respondent()  # Загружаем список респондентов
-    correct=0
-    name = input("Введите ваше имя: ").strip()
+    M = 3  # mitu inimest
 
-    if not add_respondent(name, ""):
-        return
-
-    correct = 0
-    used_questions = []# Задаем вопросы
-
-
-    for _ in range(TOTAL_QUESTIONS):
+    while True:
+        print("\n📋 MENÜÜ:\n1. Alusta küsimustikku\n2. Lisa uus küsimus\n3. Välju")
         while True:
-            question, answer = select_random_question()
+            try:
+                valik = input("Vali tegevus: ")
+                if valik == "":
+                    print("\n📋 MENÜÜ:\n1. Alusta küsimustikku\n2. Lisa uus küsimus\n3. Välju")
+                else:
+                    break
+            except:
+                pass
 
-            if question in used_questions:
-                continue  # Пропускаем уже заданные вопросы
-
-            used_questions.append(question)
-            user_answer = input(f"{name}, {question}: ").strip().lower()
-
-            if user_answer == answer.lower():
-                correct += 1
+        if valik == "1":
+            for i in range(M):
+                name = input("Sisesta nimi: ")
+                email = input("Sisesta email: ")
+                if name in tests:
+                    print("❗ See inimene on juba testitud.")
+                else:
+                    start_quiz(name, email)
+        elif valik == "2":
+            add_question()
+            save_question()
+        elif valik == "3":
             break
+        else:
+            print("❌ Vigane valik.")
 
-    update_score(name, correct)
-
-    print(f"\n{name}, вы ответили правильно на {correct} из {TOTAL_QUESTIONS} вопросов.")
-    if correct > TOTAL_QUESTIONS // 2:
-        print("Поздравляем, вы прошли тест успешно!")
-    else:
-        print("К сожалению, вы не прошли тест.")
 
 if __name__ == "__main__":
     main()

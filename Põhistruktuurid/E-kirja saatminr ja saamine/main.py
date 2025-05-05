@@ -35,11 +35,6 @@ def saada_kiri():
     except Exception as e:
         print("Viga: ", e)
 
-
-import smtplib
-import ssl
-from email.message import EmailMessage
-
 def htmlmsg():
     kellele = input("Kellele saata: ")
     smtp_server = "smtp.gmail.com"

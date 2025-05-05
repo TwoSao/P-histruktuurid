@@ -1,46 +1,26 @@
 import json
-question = {}
-path="Tund7.3/kusimused_vastused.json"
-def save_question():
-    with open(path, "w", encoding="utf-8") as file:
-        json.dump(question, file, ensure_ascii=False, indent=4)
 
-def load_question():
-    global question
+QUESTION_FILE = "questions.json"
+kus_vas = {}
+
+def load_questions():
+    global kus_vas
     try:
-        with open(path, "r", encoding="utf-8") as file:
-            question = json.load(file)
+        with open(QUESTION_FILE, "r", encoding="utf-8") as f:
+            kus_vas = json.load(f)
     except FileNotFoundError:
-        question = {}
+        kus_vas = {}
+
+def save_question():
+    with open(QUESTION_FILE, "w", encoding="utf-8") as f:
+        json.dump(kus_vas, f, ensure_ascii=False, indent=2)
 
 def add_question():
-    while True:
-        try:
-            question_text = input("Enter the question(q - exit): ")
-            if question_text == "q":
-                break
-            if question_text == "":
-                print("Question cannot be empty.")
-                continue
-            else:
-                answer = input("Enter the answer: ")
-                if answer == "":
-                    print("Answer cannot be empty.")
-                    continue
-                else:
-                    question[question_text] = answer
-                    save_question()
-                    print("Question and answer saved successfully.")
-                    break
-
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            break
-def select_random_question():
-    import random
-    if not question:
-        print("No questions available.")
-        return None
-    question_text = random.choice(list(question.keys()))
-    answer = question[question_text]
-    return question_text, answer
+    question = input("Sisesta uus küsimus: ")
+    answer = input("Sisesta õige vastus: ")
+    load_questions()
+    kus_vas[question] = answer
+    save_question()
+    print("✅ Küsimus lisatud.")
+load_questions()
+print(kus_vas)
