@@ -1,8 +1,8 @@
-
 import tkinter as tk
-from  tkinter import ttk
+from tkinter import ttk, messagebox
 from Eposti import send_email_notification
 from utils import save_draft, load_drafts, restore_last_draft, delete_draft_from_file
+
 themes = {
     "light": {
         "bg": "white",
@@ -24,34 +24,35 @@ themes = {
     }
 }
 current_theme = "light"
+
 def showpreview():
     prew = tk.Toplevel()
     prew.title("Preview email")
-    prew["bg"] = "white"
+    prew["bg"] = themes[current_theme]["bg"]
     prew.geometry("600x400")
 
     body = kiri_entry.get("1.0", tk.END)
     senderE = email_entry.get()
     SenderT = teema_entry.get()
 
-    senderE_label = tk.Label(prew, text=f"To: {senderE}", bg="white", anchor="w")
+    senderE_label = ttk.Label(prew, text=f"To: {senderE}")
     senderE_label.grid(row=0, column=0, sticky="w", padx=10, pady=5)
 
-    SenderT_label = tk.Label(prew, text=f"Subject: {SenderT}", bg="white", anchor="w")
+    SenderT_label = ttk.Label(prew, text=f"Subject: {SenderT}")
     SenderT_label.grid(row=1, column=0, sticky="w", padx=10, pady=5)
 
-    text_frame = tk.Frame(prew, bd=1, relief="solid", bg="white")
+    text_frame = ttk.Frame(prew)
     text_frame.grid(row=2, column=0, sticky="nsew", padx=10, pady=5)
 
-    SenderK = tk.Text(text_frame, wrap="word", bg="white")
+    SenderK = tk.Text(text_frame, wrap="word", bg=themes[current_theme]["text_bg"], fg=themes[current_theme]["text_fg"])
     SenderK.insert("1.0", body)
-    SenderK.config(state="disabled")  # Только для чтения
+    SenderK.config(state="disabled")
 
-    scroll = tk.Scrollbar(text_frame, command=SenderK.yview)
+    scroll = ttk.Scrollbar(text_frame, command=SenderK.yview)
     scroll.pack(side="right", fill="y")
     SenderK.pack(side="left", fill="both", expand=True)
 
-    btn_close = tk.Button(prew, text="Close", command=prew.destroy)
+    btn_close = ttk.Button(prew, text="Close", command=prew.destroy)
     btn_close.grid(row=3, column=0, pady=10)
 
 def setup_autosave():
@@ -59,46 +60,45 @@ def setup_autosave():
     root.after(90000, setup_autosave)
 
 def show_drafts_window():
-
     drafts_win = tk.Toplevel(root)
     drafts_win.title("Saved Drafts")
     drafts_win.geometry("600x400")
+    drafts_win["bg"] = themes[current_theme]["bg"]
 
     drafts = load_drafts()
 
     if not drafts:
-        tk.Label(drafts_win, text="No drafts found", pady=20).pack()
+        ttk.Label(drafts_win, text="No drafts found").pack(pady=20)
         return
 
-    scroll_frame = tk.Frame(drafts_win)
-    scroll_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+    scroll_frame = ttk.Frame(drafts_win)
+    scroll_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
-    scrollbar = tk.Scrollbar(scroll_frame)
-    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+    scrollbar = ttk.Scrollbar(scroll_frame)
+    scrollbar.pack(side="right", fill="y")
 
     draft_list = tk.Listbox(
         scroll_frame,
         yscrollcommand=scrollbar.set,
         width=80,
-        font=('Arial', 10)
+        font=('Arial', 10),
+        bg=themes[current_theme]["text_bg"],
+        fg=themes[current_theme]["text_fg"]
     )
 
-    # Display newest drafts first
     for draft in reversed(drafts):
         preview = f"{draft.get('time','')} | To: {draft.get('to','')} | {draft.get('subject','')}"
         draft_list.insert(tk.END, preview)
 
-    draft_list.pack(fill=tk.BOTH, expand=True)
+    draft_list.pack(fill="both", expand=True)
     scrollbar.config(command=draft_list.yview)
 
-    # Button functions
     def load_draft():
         selected = draft_list.curselection()
         if selected:
-            idx = len(drafts) - selected[0] - 1  # Reverse index
+            idx = len(drafts) - selected[0] - 1
             draft = drafts[idx]
 
-            # Clear and populate fields
             for widget, key in [
                 (email_entry, 'to'),
                 (teema_entry, 'subject'),
@@ -113,11 +113,10 @@ def show_drafts_window():
         selected = draft_list.curselection()
         if selected:
             idx = len(drafts) - selected[0] - 1
-            if delete_draft_from_file(idx):  # Implement this in utils.py
+            if delete_draft_from_file(idx):
                 draft_list.delete(selected[0])
 
-    # Button panel
-    btn_frame = tk.Frame(drafts_win)
+    btn_frame = ttk.Frame(drafts_win)
     btn_frame.pack(pady=5)
 
     buttons = [
@@ -127,19 +126,7 @@ def show_drafts_window():
     ]
 
     for text, command in buttons:
-        tk.Button(
-            btn_frame,
-            text=text,
-            width=10,
-            command=command
-        ).pack(side=tk.LEFT, padx=5)
-
-def delete_draft(listbox, drafts):
-    selection = listbox.curselection()
-    if selection:
-        draft_index = len(drafts) - selection[0] - 1
-        if delete_draft(draft_index):
-            listbox.delete(selection[0])
+        ttk.Button(btn_frame, text=text, width=10, command=command).pack(side="left", padx=5)
 
 def toggle_theme():
     global current_theme
@@ -149,15 +136,14 @@ def toggle_theme():
 
 def apply_theme():
     theme = themes[current_theme]
-
     root.config(bg=theme["bg"])
-    frame.config(bg=theme["bg"])
+    frame.config(style="TFrame")
 
     for label in [email_label, teema_label, kiri_label]:
-        label.config(bg=theme["bg"], fg=theme["fg"])
+        label.config(style="TLabel")
 
-    email_entry.config(bg=theme["entry_bg"], fg=theme["entry_fg"])
-    teema_entry.config(bg=theme["entry_bg"], fg=theme["entry_fg"])
+    email_entry.config(style="TEntry")
+    teema_entry.config(style="TEntry")
 
     kiri_entry.config(
         bg=theme["text_bg"],
@@ -165,59 +151,57 @@ def apply_theme():
         insertbackground=theme["fg"]
     )
 
-    # Кнопки
-    for button in [btn_saada, btn_preview, btn_drafts, theme_btn]:
-        button.config(bg=theme["button_bg"], fg=theme["fg"])
+    for button in [btn_saada, btn_preview, btn_drafts]:
+        button.config(style="TButton")
 
 root = tk.Tk()
+style = ttk.Style()
+style.theme_use("clam")
+
 root.title("E-posti klient")
-root.geometry("600x400")
+root.geometry("1980x1080")
 root["bg"] = "white"
 
+frame = ttk.Frame(root, padding="10")
+frame.pack(fill="both", expand=True)
 
+email_label = ttk.Label(frame, text="E-post:")
+email_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
 
-frame = tk.Frame(root, bg="lightblue")
-frame.pack(pady=10, padx=10, fill="both", expand=True)
-
-email_label = tk.Label(frame, text="E-post:", bg="white")
-email_label.grid(row=0, column=0, padx=5, pady=5)
-email_label.config(font=("Arial", 12))
-
-email_entry = tk.Entry(frame, width=50, bg="white")
+email_entry = ttk.Entry(frame, width=50)
 email_entry.grid(row=0, column=1, padx=5, pady=5)
 
-teema_label = tk.Label(frame, text="Teema:", bg="white")
-teema_label.grid(row=1, column=0, padx=5, pady=5)
-teema_label.config(font=("Arial", 12))
+teema_label = ttk.Label(frame, text="Teema:")
+teema_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
 
-teema_entry = tk.Entry(frame, width=50, bg="white")
+teema_entry = ttk.Entry(frame, width=50)
 teema_entry.grid(row=1, column=1, padx=5, pady=5)
 
-kiri_label = tk.Label(frame, text="Kiri:", bg="white")
-kiri_label.grid(row=2, column=0, padx=5, pady=5)
-kiri_label.config(font=("Arial", 12))
+kiri_label = ttk.Label(frame, text="Kiri:")
+kiri_label.grid(row=2, column=0, padx=5, pady=5, sticky="nw")
 
-kiri_entry = tk.Text(frame, width=50, height=10, bg="white")
+kiri_entry = tk.Text(frame, width=50, height=10)
 kiri_entry.grid(row=2, column=1, padx=5, pady=5)
 
-btn_frame = tk.Frame(root, bg="white")
-btn_frame.pack()
-btn_saada = tk.Button(btn_frame, text="Saada", bg="green", command=lambda: send_email_notification(email_entry.get(), teema_entry.get(), kiri_entry.get("1.0", tk.END)))
-btn_saada.grid(row=3, column=3, padx=5, pady=5, sticky="e")
+btn_frame = ttk.Frame(frame)
+btn_frame.grid(row=3, column=0, columnspan=2, pady=10, sticky="e")
 
-btn_preview = tk. Button(btn_frame, text="Preview", bg="gray", command=lambda: showpreview())
-btn_preview.grid(row=3, column=2, padx=5, pady=5, sticky="e")
+btn_saada = ttk.Button(btn_frame, text="Saada",
+                       command=lambda: send_email_notification(
+                           email_entry.get(),
+                           teema_entry.get(),
+                           kiri_entry.get("1.0", tk.END)
+                       ))
+btn_saada.pack(side="right", padx=5)
 
-btn_drafts = tk.Button(btn_frame, text="Mustandid", bg="lightgray", command=show_drafts_window)
-btn_drafts.grid(row=3, column=1, padx=5, pady=5, sticky="w")
+btn_preview = ttk.Button(btn_frame, text="Preview", command=showpreview)
+btn_preview.pack(side="right", padx=5)
 
-theme_btn = tk.Button(
-    btn_frame,
-    text="☀️",
-    command=toggle_theme,
-    font=("Arial", 12))
-theme_btn.grid(row=3, column=0, sticky="w", padx=5, pady=5)
+btn_drafts = ttk.Button(btn_frame, text="Mustandid", command=show_drafts_window)
+btn_drafts.pack(side="right", padx=5)
 
+theme_btn = tk.Button(btn_frame, text="☀️", command=toggle_theme, font=("Arial", 12))
+theme_btn.pack(side="left", padx=5)
 
 setup_autosave()
 restore_last_draft(email_entry, teema_entry, kiri_entry)
@@ -225,5 +209,3 @@ root.protocol("WM_DELETE_WINDOW",
               lambda: [save_draft(email_entry, teema_entry, kiri_entry), root.destroy()])
 apply_theme()
 root.mainloop()
-
-
