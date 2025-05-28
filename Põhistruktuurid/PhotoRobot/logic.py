@@ -12,7 +12,7 @@ max_pildid = {}
 def loenda_pildid(kaust):
     full_path = os.path.join(base_path, kaust)
     if not os.path.exists(full_path):
-        print(f"❌ Kausta ei leitud: {full_path}")
+        print(f"Kausta ei leitud: {full_path}")
         return 0
     return len([f for f in os.listdir(full_path) if f.endswith(".png")])
 
@@ -24,7 +24,7 @@ def toggle_osa(nimi, canvas, x, y):
     path = os.path.join(base_path, kaust, pildi_nimi)
 
     if not os.path.exists(path):
-        print(f"❌ Puudub: {path}")
+        print(f"Puudub: {path}")
         return
 
     pil_img = Image.open(path).convert("RGBA").resize((400, 400))

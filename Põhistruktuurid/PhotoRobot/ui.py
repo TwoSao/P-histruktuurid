@@ -18,7 +18,7 @@ def loo_ui(app):
     button_style = {
         "width": 150, "height": 40,
         "font": ("Arial", 16),
-        "fg_color": "white", "hover_color": "lightblue",
+        "fg_color": "black",
         "corner_radius": 20,
     }
 
@@ -26,7 +26,7 @@ def loo_ui(app):
 
     for nimi, label in [
         ("frame", "Näokuju"),
-        ("kulmud", "Kulmud"),
+        ("kulmud", "Lõug"),
         ("silma", "Silma"),
         ("nina", "Nina"),
         ("suu", "Suu"),
