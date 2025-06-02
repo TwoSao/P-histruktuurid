@@ -66,8 +66,8 @@ class cart:
 
 
 if __name__ == "__main__":
-    shop1 = shop("Martin")
-    shop2 = shop("Mark")
+    shop1 = shop("Illia")
+    shop2 = shop("Illia2")
 
     p1 = product("Milk", 80, 1)
     p1a = product("Milk", 80, 1)
